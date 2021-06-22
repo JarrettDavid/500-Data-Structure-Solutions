@@ -17,41 +17,51 @@ class SubArrayCheck {
         {
             int i = 0;
             int j = 1;
+            int sumCheck = 0;
             int start = 0;
             int counter = 0;
-            int sumCheck = 0;
             int incrementor = 0;
             
             int *subArray = new int(n);
             
-            while(j <= n-1 && i <= n-1)
+            /*
+            1. get first value
+            2. get second
+            */
+            for(int x = 0; x <= n - 1; x++) 
             {
-                start = storedArray[i];
-                incrementor = storedArray[j];
+                start = storedArray[x];
                 
-                if(sumCheck == 0)
+                subArray[counter] = start;
+                std::cout<< x << ". Start " << start << std::endl;
+                for(int y = (x+1); y <= n - 1; y++) 
                 {
-                    sumCheck = sumCheck + start + incrementor;
-                    std::cout<< i <<". Sum Check A: " << sumCheck << std::endl;
-                    sumCheck = 0;
-                    i+=1;
+                    incrementor = storedArray[y];
                     
-                    for(int z = 0; z <= n - 1; z++)
-                    {            
-                        std::cout << z <<". Sub Array: " << subArray[i] << std::endl;
-                    }
-                }
-                else
-                {
-                    subArray[counter] = start;
+                    if(counter == 0)
+                        sumCheck = sumCheck + start + incrementor;
+                    else
+                        sumCheck = sumCheck + incrementor;
+                        
+                    std::cout<< y << " Incrementor " << incrementor << std::endl;
                     counter+=1;
-                    subArray[counter+1] = incrementor;
-                    sumCheck = sumCheck + incrementor;
-                    std::cout<< i <<". Sum Check B: " << sumCheck << std::endl;
-                    j+=1;
+                    subArray[counter] = incrementor;
+                    
+                    if(sumCheck == 0)
+                    {
+                        for(int z = 0; z <= counter; z++)
+                        {
+                            std::cout << z <<". Sub Array: " << subArray[z] << std::endl;
+                        }
+                        y = (n-1);
+                        sumCheck = 0;
+                        counter = 0;
+                    }
+                    
+                    std::cout<< "Sum Check: " << sumCheck << std::endl;
                 }
             }
-            
+
             return sumCheck;
             
         }//End of SubArraySearch
