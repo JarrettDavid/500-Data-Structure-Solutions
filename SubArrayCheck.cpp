@@ -24,41 +24,42 @@ class SubArrayCheck {
             
             int *subArray = new int(n);
             
-            /*
-            1. get first value
-            2. get second
-            */
             for(int x = 0; x <= n - 1; x++) 
             {
                 start = storedArray[x];
                 
                 subArray[counter] = start;
                 std::cout<< x << ". Start " << start << std::endl;
-                for(int y = (x+1); y <= n - 1; y++) 
+                
+                if((x+1) <= (n-1))
                 {
-                    incrementor = storedArray[y];
-                    
-                    if(counter == 0)
-                        sumCheck = sumCheck + start + incrementor;
-                    else
-                        sumCheck = sumCheck + incrementor;
-                        
-                    std::cout<< y << " Incrementor " << incrementor << std::endl;
-                    counter+=1;
-                    subArray[counter] = incrementor;
-                    
-                    if(sumCheck == 0)
+                    for(int y = (x+1); y <= n - 1; y++) 
                     {
-                        for(int z = 0; z <= counter; z++)
+                        incrementor = storedArray[y];
+                        
+                        if(counter == 0)
+                            sumCheck = sumCheck + start + incrementor;
+                        else
+                            sumCheck = sumCheck + incrementor;
+                            
+                        std::cout<< x <<". x value "<< y << ". Incrementor " << incrementor << std::endl;
+                        counter+=1;
+                        subArray[counter] = incrementor;
+                        
+                        if(sumCheck == 0)
                         {
-                            std::cout << z <<". Sub Array: " << subArray[z] << std::endl;
+                            for(int z = 0; z <= counter; z++)
+                            {
+                                std::cout << z <<". Sub Array: " << subArray[z] << std::endl;
+                                subArray[z] = 0; 
+                            }
+                            y = (n-1);
+                            sumCheck = 0;
+                            counter = 0;
                         }
-                        y = (n-1);
-                        sumCheck = 0;
-                        counter = 0;
+                        
+                        std::cout<< "Sum Check: " << sumCheck << std::endl;
                     }
-                    
-                    std::cout<< "Sum Check: " << sumCheck << std::endl;
                 }
             }
 
@@ -89,7 +90,7 @@ int main() {
 
     using namespace std;
 
-    int array [] = {1, 2, -3, 4, 5, 6, -7, -8};
+    int array [] = {1, 2, -3, 4, 5, -8, -7, 6};
     
     SubArrayCheck test(array);
     
