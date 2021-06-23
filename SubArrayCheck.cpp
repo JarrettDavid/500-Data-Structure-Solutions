@@ -17,52 +17,56 @@ class SubArrayCheck {
         {
             int i = 0;
             int j = 1;
-            int sumCheck = 0;
             int start = 0;
             int counter = 0;
+            int sumCheck = 0;
             int incrementor = 0;
             
-            int *subArray = new int(n);
+            bool stateCheck = false;
             
-            for(int x = 0; x <= n - 1; x++) 
+            int *subArray = new int(n);
+            start = storedArray[i];
+            incrementor = storedArray[j];
+            sumCheck = sumCheck + start + incrementor;
+            
+            subArray[counter] = start;
+            counter+=1;
+            std::cout<< i <<". start: "<< start <<" incrementor: "<< incrementor << " Sum Check A: " << sumCheck << std::endl;
+            while(j <= (n-1))
             {
-                start = storedArray[x];
-                
-                subArray[counter] = start;
-                std::cout<< x << ". Start " << start << std::endl;
-                
-                if((x+1) <= (n-1))
+                if(sumCheck == 0 || j == (n-1))
                 {
-                    for(int y = (x+1); y <= n - 1; y++) 
-                    {
-                        incrementor = storedArray[y];
-                        
-                        if(counter == 0)
-                            sumCheck = sumCheck + start + incrementor;
-                        else
-                            sumCheck = sumCheck + incrementor;
-                            
-                        std::cout<< x <<". x value "<< y << ". Incrementor " << incrementor << std::endl;
-                        counter+=1;
-                        subArray[counter] = incrementor;
-                        
-                        if(sumCheck == 0)
-                        {
-                            for(int z = 0; z <= counter; z++)
-                            {
-                                std::cout << z <<". Sub Array: " << subArray[z] << std::endl;
-                                subArray[z] = 0; 
-                            }
-                            y = (n-1);
-                            sumCheck = 0;
-                            counter = 0;
-                        }
-                        
-                        std::cout<< "Sum Check: " << sumCheck << std::endl;
+                    i+=1;
+                    j = (i+1);
+                    
+                    for(int z = 0; z <= counter-1; z++)
+                    {            
+                        std::cout << z <<". Sub Array: " << subArray[z] << std::endl;
                     }
+                    
+                    counter = 0;
+                    start = storedArray[i];
+                    incrementor = storedArray[j];
+                    subArray[counter] = start;
+                    
+                    counter+=1;
+                    subArray[counter] = incrementor;
+                    sumCheck = 0;
+                    sumCheck = sumCheck + start + incrementor;
+                    std::cout<< i <<". start: "<< start <<" incrementor: "<< incrementor << " Sum Check B: " << sumCheck << std::endl;
                 }
-            }
+                
+                subArray[counter] = incrementor;
+                
+                counter+=1;
+                j+=1;
+                incrementor = storedArray[j];
+                
+                sumCheck = sumCheck + incrementor;
 
+                std::cout<< i <<" incrementor: "<< incrementor << " Sum Check D: " << sumCheck << std::endl;
+            }
+            
             return sumCheck;
             
         }//End of SubArraySearch
@@ -90,7 +94,7 @@ int main() {
 
     using namespace std;
 
-    int array [] = {1, 2, -3, 4, 5, -8, -7, 6};
+    int array [] = {1, 2, -3, 4, 5, -8, -7, -8};
     
     SubArrayCheck test(array);
     
