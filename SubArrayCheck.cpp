@@ -39,7 +39,7 @@ class SubArrayCheck {
                     i+=1;
                     j = (i+1);
                     
-                    for(int z = 0; z <= counter-1; z++)
+                    for(int z = 0; z <= counter; z++)
                     {            
                         std::cout << z <<". Sub Array: " << subArray[z] << std::endl;
                     }
@@ -63,7 +63,7 @@ class SubArrayCheck {
                 incrementor = storedArray[j];
                 
                 sumCheck = sumCheck + incrementor;
-
+               subArray[counter] = incrementor;
                 std::cout<< i <<" incrementor: "<< incrementor << " Sum Check D: " << sumCheck << std::endl;
             }
             
@@ -94,7 +94,7 @@ int main() {
 
     using namespace std;
 
-    int array [] = {1, 2, -3, 4, 5, -8, -7, -8};
+    int array [] = {3, 4, -7, 3, 1, 3, 1, -4, -2, -2};
     
     SubArrayCheck test(array);
     
