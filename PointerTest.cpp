@@ -15,10 +15,12 @@ class PointerTest {
         PointerTest(int test = 7) : storeValue(test){}
 
         PointerTest(int Array[]) {
-            int size = sizeof(*Array)/sizeof(Array[0]);
+            int size = sizeof(Array)/sizeof(Array[0]);
+            std::cout<<size;
+            
             for(int i = 0; i <= (size - 1); i++)
             {
-                storeArray[i] = Array[i];
+                testArray[i] = Array[i];
             }
         }
         
@@ -27,12 +29,12 @@ class PointerTest {
             return storeValue;
         }
 
-        void PrintPtrArray() const 
+        void PrintPtrArray() 
         {
-            int size = sizeof(*storeArray)/sizeof(storeArray[0]);
+            int size = sizeof(testArray)/sizeof(testArray[0]);
             for(int i = 0; i <= (size - 1); i++)
             {
-                std::cout<<storeArray[i]<<" ";
+                std::cout<<testArray[i]<<" ";
             }
         }
         
@@ -48,10 +50,6 @@ int main() {
     using namespace std;
     
     int Test[] = {1,2,3,5,6,7,8,12,435,4,32,7,976};
-
-    PointerTest *test3 = new PointerTest(Test);
-    
-    test3->PrintPtrArray();
 
     PointerTest *test1 = new PointerTest(23);
     
@@ -96,6 +94,10 @@ int main() {
     
     delete test1;
     delete test2;
+
+    PointerTest *test3 = new PointerTest(Test);
+    
+    test3->PrintPtrArray();    
     
     return 0;
     
